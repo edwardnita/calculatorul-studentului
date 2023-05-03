@@ -16,8 +16,8 @@ double division(double a, double b) {
     return a / b;
 }
 
-int modulo(double a, double b) {
-    // TODO
+int modulo(int a, int b) {
+    return a % b;
 }
 
 int negation(int a) {
@@ -36,6 +36,14 @@ int bit_xor(int a, int b) {
     return a ^ b;
 }
 
+// calcularea factorialului cu acumulator
+int recurssion(int n, int accumulator) {
+    if(n == 0)
+        return accumulator;
+    else
+        return recurssion(n-1, n * accumulator);
+}
+
 int factorial(int n) {
-    // TODO
+    return recurssion(n, 1);
 }
