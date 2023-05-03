@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define TOL 0.000001
+#define TOL 0.0000001
 #define MAXITER 100
 #define ln2 0.693147
 
@@ -33,14 +33,46 @@ double ln(double arg) {
     }
 }
 
-double log(double argument, double base) {
+double logarithm(double argument, double base) {
     return ln(argument) / ln(base);
 }
 
 double exponential(double exp) {
-    // TODO
+    double px = 1, S = 1;
+    int i;
+    for(i = 1; i < MAXITER; i++) {
+        px *= exp/i;
+        S += px;
+        if(px < TOL && px > -TOL)
+            return S;
+    }
+    return S;
+}
+
+// functia de putere cu exponent natural
+double natural_power(double base, int exp) {
+    double pow;
+    if (exp != 0) {
+        pow = natural_power(base, exp/2);
+    } else {
+        return 1;
+    }
+    if (exp & 1 == 1) {
+        return base * pow *pow;
+    } else {
+        return pow * pow;
+    }
 }
 
 double power(double base, double exp) {
-    // TODO
+    int nat;
+    double real, e;
+    if(exp < 0){
+        base = 1 / base;
+        exp = -exp;
+    }
+    nat = (int)exp;
+    real = exp - (double)nat;
+    e = real * ln(base);
+    return exponential(e) * natural_power(base, nat);
 }
