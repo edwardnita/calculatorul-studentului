@@ -16,11 +16,14 @@ double Taylor_ln(double x) {
     return APROX(S);
 }
 
-double ln(double arg) {
+double ln(double arg, int *imposibil) {
     int power2 = 0;
+
+    *imposibil = 1;
     if(arg <= 0){
         // imposibil
-        return;
+        *imposibil = 0;
+        return 0;
     } else if (arg < 2) {
         //formula este pentru ln(1+x)
         return APROX(Taylor_ln(arg - 1));
@@ -34,8 +37,8 @@ double ln(double arg) {
     }
 }
 
-double logarithm(double argument, double base) {
-    return APROX(ln(argument) / ln(base));
+double logarithm(double argument, double base, int *imposibil) {
+    return APROX(ln(argument, imposibil) / ln(base, imposibil));
 }
 
 double exponential(double exp) {
@@ -65,7 +68,7 @@ double natural_power(double base, int exp) {
     }
 }
 
-double power(double base, double exp) {
+double power(double base, double exp, int *imposibil) {
     int nat;
     double real, e;
     if(exp < 0){
@@ -74,6 +77,15 @@ double power(double base, double exp) {
     }
     nat = (int)exp;
     real = exp - (double)nat;
-    e = real * ln(base);
+    // conditie oprire
+    if (base < 0 && (real >= TOL && real <= -TOL)) {
+        *imposibil = 0;
+        return 0;
+    } else if (base < 0) {
+        e = 0;
+    } else {
+        e = real * ln(base, imposibil);
+    }
+    *imposibil = 1;
     return APROX(exponential(e) * natural_power(base, nat));
 }

@@ -4,9 +4,17 @@
 #define pi 3.141592
 #define APROX(x) ((x) + 5 * TOL)
 
-double arcsin(double x) {
+double arcsin(double x, int *imposibil) {
     double S = x, px = x;
     int i;
+
+    // verificare interval
+    imposibil = 1;
+    if(x < -1 || x > 1) {
+        *imposibil = 0;
+        return 0;
+    }
+
     for (i = 1; i < MAXITER; i++) {
         px *= x * x * (2 * i - 1)/(i * 2);
         S += px/(2 * i + 1);
@@ -16,9 +24,9 @@ double arcsin(double x) {
     return APROX(S);
 }
 
-double arccos(double x) {
+double arccos(double x, int *imposibil) {
     // arcsin + arccos = pi/2
-    return APROX(pi /  2 - arcsin(x));
+    return APROX(pi /  2 - arcsin(x, imposibil));
 }
 
 double arctan(double x) {

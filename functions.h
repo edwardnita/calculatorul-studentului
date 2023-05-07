@@ -21,13 +21,13 @@ int bit_xor(int, int);
 
 int factorial(int);
 
-double ln(double);
+double ln(double, int*);
 
-double log(double, double);
+double log(double, double, int*);
 
 double exponential(double);
 
-double power(double, double);
+double power(double, double, int*);
 
 double sinus(double);
 
@@ -37,9 +37,9 @@ double tangent(double);
 
 double cotangent(double);
 
-double arcsin(double);
+double arcsin(double, int*);
 
-double arccos(double);
+double arccos(double, int*);
 
 double arctan(double);
 
