@@ -37,7 +37,7 @@ double ln(double arg, int *imposibil) {
     }
 }
 
-double logarithm(double argument, double base, int *imposibil) {
+double log(double argument, double base, int *imposibil) {
     return APROX(ln(argument, imposibil) / ln(base, imposibil));
 }
 
