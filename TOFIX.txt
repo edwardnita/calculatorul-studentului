@@ -1,3 +1,2 @@
 Testare generala
-Adaugare macro verificare toleranta
 Modificare arcsin, arccos

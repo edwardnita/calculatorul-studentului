@@ -3,6 +3,7 @@
 #define MAXITER 100
 #define pi 3.141592
 #define APROX(x) ((x) + 5 * TOL)
+#define CHECK_TOL(x) ((x) < TOL && (x) > -TOL)
 
 double arcsin(double x, int *imposibil) {
     double S = x, px = x;
@@ -18,7 +19,7 @@ double arcsin(double x, int *imposibil) {
     for (i = 1; i < MAXITER; i++) {
         px *= x * x * (2 * i - 1)/(i * 2);
         S += px/(2 * i + 1);
-        if(px/(2 * i + 1) < TOL && px/(2 * i + 1) > -TOL) 
+        if(CHECK_TOL(px/(2 * i + 1))) 
             return APROX(S);
     }
     return APROX(S);
@@ -40,7 +41,7 @@ double arctan(double x) {
         for (i = 0; i < MAXITER; i++) {
             px *= -x*x;
             S += px/(2 * i + 1);
-            if(px/(2 * i + 1) < TOL && px/(2 * i + 1) > -TOL) 
+            if(CHECK_TOL(px/(2 * i + 1))) 
                 return APROX(S);
         }
         return APROX(S);

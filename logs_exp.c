@@ -3,6 +3,7 @@
 #define MAXITER 100
 #define ln2 0.693147
 #define APROX(x) ((x) + 5 * TOL)
+#define CHECK_TOL(x) ((x) < TOL && (x) > -TOL)
 
 double Taylor_ln(double x) {
     int i;

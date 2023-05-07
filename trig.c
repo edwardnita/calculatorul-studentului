@@ -2,6 +2,7 @@
 #define TOL 0.0000001
 #define MAXITER 100
 #define APROX(x) ((x) + 5 * TOL)
+#define CHECK_TOL(x) ((x) < TOL && (x) > -TOL)
 
 double sinus(double x) {
     double px = x, S = x;
@@ -9,7 +10,7 @@ double sinus(double x) {
     for(i = 1; i < MAXITER; i++) {
         px *= -x*x/(2 * i * (2 * i + 1));
         S += px;
-        if(px < TOL && px > -TOL) 
+        if(CHECK_TOL(px)) 
             return APROX(S);
     }
     return APROX(S);
@@ -21,7 +22,7 @@ double cosinus(double x) {
     for(i = 1; i < MAXITER; i++) {
         px *= -x*x/((2 * i - 1) * 2 * i);
         S += px;
-        if(px < TOL && px > -TOL)
+        if(CHECK_TOL(px))
             return APROX(S);
     }
     return APROX(S);
