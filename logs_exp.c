@@ -11,7 +11,7 @@ double Taylor_ln(double x) {
     for(i = 1; i < MAXITER; i++) {
         px *= -x;
         S += px/i;
-        if(px/i < TOL && px/i > -TOL)
+        if(CHECK_TOL(px/i))
             return APROX(S);
     }
     return APROX(S);
@@ -48,7 +48,7 @@ double exponential(double exp) {
     for(i = 1; i < MAXITER; i++) {
         px *= exp/i;
         S += px;
-        if(px < TOL && px > -TOL)
+        if(CHECK_TOL(px))
             return APROX(S);
     }
     return APROX(S);
@@ -79,11 +79,12 @@ double power(double base, double exp, int *imposibil) {
     nat = (int)exp;
     real = exp - (double)nat;
     // conditie oprire
-    if (base < 0 && (real >= TOL && real <= -TOL)) {
+    if (base < 0 && !CHECK_TOL(real)) {
         *imposibil = 0;
         return 0;
     } else if (base < 0) {
-        e = 0;
+        // avem base^0 = 1
+        e = 1;
     } else {
         e = real * ln(base, imposibil);
     }

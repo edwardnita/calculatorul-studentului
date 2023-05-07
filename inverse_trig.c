@@ -17,7 +17,7 @@ double arcsin(double x, int *imposibil) {
     }
 
     for (i = 1; i < MAXITER; i++) {
-        px *= x * x * (2 * i - 1)/(i * 2);
+        px *= (2*i -1) * 2 * i * x * x/(4 * i * i);
         S += px/(2 * i + 1);
         if(CHECK_TOL(px/(2 * i + 1))) 
             return APROX(S);
