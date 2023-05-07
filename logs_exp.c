@@ -2,6 +2,7 @@
 #define TOL 0.0000001
 #define MAXITER 100
 #define ln2 0.693147
+#define APROX(x) ((x) + 5 * TOL)
 
 double Taylor_ln(double x) {
     int i;
@@ -10,9 +11,9 @@ double Taylor_ln(double x) {
         px *= -x;
         S += px/i;
         if(px/i < TOL && px/i > -TOL)
-            return S;
+            return APROX(S);
     }
-    return S;
+    return APROX(S);
 }
 
 double ln(double arg) {
@@ -22,19 +23,19 @@ double ln(double arg) {
         return;
     } else if (arg < 2) {
         //formula este pentru ln(1+x)
-        return Taylor_ln(arg - 1);
+        return APROX(Taylor_ln(arg - 1));
     } else {
         //vom folosi ln(x) = k*ln2 + ln(x/2^k) 
         while (arg >= 2) {
             arg /= 2;
             power2++;
         }
-        return power2 * ln2 +  Taylor_ln(arg - 1);
+        return APROX(power2 * ln2 +  Taylor_ln(arg - 1));
     }
 }
 
 double logarithm(double argument, double base) {
-    return ln(argument) / ln(base);
+    return APROX(ln(argument) / ln(base));
 }
 
 double exponential(double exp) {
@@ -44,9 +45,9 @@ double exponential(double exp) {
         px *= exp/i;
         S += px;
         if(px < TOL && px > -TOL)
-            return S;
+            return APROX(S);
     }
-    return S;
+    return APROX(S);
 }
 
 // functia de putere cu exponent natural
@@ -74,5 +75,5 @@ double power(double base, double exp) {
     nat = (int)exp;
     real = exp - (double)nat;
     e = real * ln(base);
-    return exponential(e) * natural_power(base, nat);
+    return APROX(exponential(e) * natural_power(base, nat));
 }

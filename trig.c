@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define TOL 0.0000001
 #define MAXITER 100
+#define APROX(x) ((x) + 5 * TOL)
 
 double sinus(double x) {
     double px = x, S = x;
@@ -9,9 +10,9 @@ double sinus(double x) {
         px *= -x*x/(2 * i * (2 * i + 1));
         S += px;
         if(px < TOL && px > -TOL) 
-            return S;
+            return APROX(S);
     }
-    return S;
+    return APROX(S);
 }
 
 double cosinus(double x) {
@@ -21,15 +22,15 @@ double cosinus(double x) {
         px *= -x*x/((2 * i - 1) * 2 * i);
         S += px;
         if(px < TOL && px > -TOL)
-            return S;
+            return APROX(S);
     }
-    return S;
+    return APROX(S);
 }
 
 double tangent(double x) {
-    return sinus(x) / cosinus(x);
+    return APROX(sinus(x) / cosinus(x));
 }
 
 double cotangent(double x) {
-    return cosinus(x) / sinus(x);
+    return APROX(cosinus(x) / sinus(x));
 }
