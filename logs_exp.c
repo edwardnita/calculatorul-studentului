@@ -1,8 +1,8 @@
 #include <stdio.h>
 #define TOL 0.0000001
-#define MAXITER 100
+#define MAXITER 10000
 #define ln2 0.693147
-#define APROX(x) ((x) + 5 * TOL)
+#define APROX(x) ((x) + 5 * TOL * 10)
 #define CHECK_TOL(x) ((x) < TOL && (x) > -TOL)
 
 double Taylor_ln(double x) {
@@ -27,7 +27,7 @@ double ln(double arg, int *imposibil) {
         return 0;
     } else if (arg < 2) {
         //formula este pentru ln(1+x)
-        return APROX(Taylor_ln(arg - 1));
+        return Taylor_ln(arg - 1);
     } else {
         //vom folosi ln(x) = k*ln2 + ln(x/2^k) 
         while (arg >= 2) {
@@ -38,8 +38,17 @@ double ln(double arg, int *imposibil) {
     }
 }
 
-double log(double argument, double base, int *imposibil) {
-    return APROX(ln(argument, imposibil) / ln(base, imposibil));
+double logarithm(double argument, double base, int *imposibil) {
+    if(base == 1) {
+        *imposibil = 0;
+        return 0;
+    }
+    if(base <= 0 || argument <= 0){
+        *imposibil = 0;
+        return 0;
+    } else {
+        return ln(argument, imposibil) / ln(base, imposibil);
+    }
 }
 
 double exponential(double exp) {
@@ -84,7 +93,7 @@ double power(double base, double exp, int *imposibil) {
         return 0;
     } else if (base < 0) {
         // avem base^0 = 1
-        e = 1;
+        e = 0;
     } else {
         e = real * ln(base, imposibil);
     }

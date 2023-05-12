@@ -23,7 +23,7 @@ int factorial(int);
 
 double ln(double, int*);
 
-double log(double, double, int*);
+double logarithm(double, double, int*);
 
 double exponential(double);
 
@@ -33,9 +33,9 @@ double sinus(double);
 
 double cosinus(double);
 
-double tangent(double);
+double tangent(double, int*);
 
-double cotangent(double);
+double cotangent(double, int*);
 
 double arcsin(double, int*);
 
