@@ -2,7 +2,7 @@
 #define TOL 0.0000001
 #define MAXITER 100
 #define pi 3.141592
-#define APROX(x) ((x) + 5 * TOL)
+#define APROX(x) ((x) + 5 * TOL * 10)
 #define CHECK_TOL(x) ((x) < TOL && (x) > -TOL)
 
 double arcsin(double x, int *imposibil) {
@@ -10,7 +10,7 @@ double arcsin(double x, int *imposibil) {
     int i;
 
     // verificare interval
-    imposibil = 1;
+    *imposibil = 1;
     if(x < -1 || x > 1) {
         *imposibil = 0;
         return 0;
