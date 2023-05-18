@@ -1,7 +1,11 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "functions.h"
+
+static gchar *operation, *op1, *op2;
+double operand1, operand2, result;
 
 void initializare_butoane(GtkWidget *button[31]) {
     // creare butoane
@@ -42,7 +46,75 @@ void get_text(GtkButton *button, gpointer data) {
     GtkWidget *entry = GTK_WIDGET(data);
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(entry));
     printf("Entry Box Text: %s\n", text);
-    gchar *current_text = gtk_entry_get_text(GTK_ENTRY(entry));
+    printf("Operation: %s\n", operation);
+    if (strcmp(operation, "add") == 0) {
+        printf("Am intrat in add\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        printf("Am luat numarul: %s\n", op2);
+        // cast din gchar in double
+        operand2 = atof(op2);
+        result = addition(operand1, operand2);
+        printf("Result is: %f\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "sub") == 0) {
+        printf("Am intrat in sub\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %f\n", operand2);
+        result = 0;
+        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        result = operand1 - operand2;
+        printf("Result is: %f\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "mult") == 0) {
+        printf("Am intrat in mult\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %f\n", operand2);
+        result = 0;
+        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        result = multiplication(operand1, operand2);
+        printf("Result is: %f\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "div") == 0) {
+        printf("Am intrat in div\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %f\n", operand2);
+        result = 0;
+        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        result = division(operand1, operand2);
+        printf("Result is: %f\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "modulo") == 0) {
+        printf("Am intrat in mod\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %f\n", operand2);
+        result = 0;
+        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        result = (int)modulo((int)operand1, (int)operand2);
+        printf("Result is: %f\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
 }
 
 void add_text(GtkButton *button, gpointer data) {
@@ -54,6 +126,56 @@ void add_text(GtkButton *button, gpointer data) {
     gtk_entry_set_text(GTK_ENTRY(entry), new_text);
 
     g_free(new_text);
+}
+
+void make_add(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "add";
+}
+
+void make_sub(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "sub";
+}
+
+void make_mult(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "mult";
+}
+
+void make_div(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "div";
+}
+
+void make_modulo(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "modulo";
 }
 
 void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
@@ -109,11 +231,12 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
     g_signal_connect(button[8], "clicked", G_CALLBACK(add_text), box);
     g_signal_connect(button[9], "clicked", G_CALLBACK(add_text), box);
     g_signal_connect(button[14], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[10], "clicked", G_CALLBACK(make_add), box);
+    g_signal_connect(button[11], "clicked", G_CALLBACK(make_sub), box);
+    g_signal_connect(button[12], "clicked", G_CALLBACK(make_mult), box);
+    g_signal_connect(button[13], "clicked", G_CALLBACK(make_div), box);
+    g_signal_connect(button[16], "clicked", G_CALLBACK(make_modulo), box);
 }
-
-char input[20] = {0}, output[20] = {0};
-int count = 0;
-float actual, old;
 
 /*void calculare(GtkWidget *button) {
     // functie de calculare
@@ -135,6 +258,8 @@ int main(int argc, char **argv) {
     GtkWidget *box;
     GtkWidget *grid;
     GtkWidget *button[31];
+
+    operation = "nothing";
 
     // functie de initializare
     gtk_init(&argc, &argv);
