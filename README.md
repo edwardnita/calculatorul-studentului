@@ -13,7 +13,7 @@ Se bazeaza pe seria:
 
 Aceasta formula functioneaza doar pentru abs(x) < 1. Asa ca folosim si relatia:
  ln(x) = k*ln(X) + ln(x/2^k)
-Impartim la x la 2 de k ori, pana ce este in intervalul cerut
+Impartim x la 2 de k ori, pana ce x este in intervalul cerut
 
 ### Logaritm
 Folosim relatia urmatoare, pentru a calcula doar ln(a) si ln(b).
