@@ -38,6 +38,24 @@ void initializare_butoane(GtkWidget *button[31]) {
     button[30] = gtk_button_new_with_label("power");
 }
 
+void get_text(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    const gchar *text = gtk_entry_get_text(GTK_ENTRY(entry));
+    printf("Entry Box Text: %s\n", text);
+    gchar *current_text = gtk_entry_get_text(GTK_ENTRY(entry));
+}
+
+void add_text(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    const gchar *button_label = gtk_button_get_label(button);
+    gchar *current_text = gtk_entry_get_text(GTK_ENTRY(entry));
+
+    gchar *new_text = g_strconcat(current_text, button_label, NULL);
+    gtk_entry_set_text(GTK_ENTRY(entry), new_text);
+
+    g_free(new_text);
+}
+
 void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
                           GtkWidget *button[31]) {
     // pozitionare automata continut in fereastra
@@ -79,7 +97,37 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
 
     gtk_grid_attach(GTK_GRID(grid), button[29], 2, 17, 2, 1);
     gtk_grid_attach(GTK_GRID(grid), button[30], 4, 17, 2, 1);
+
+    g_signal_connect(button[15], "clicked", G_CALLBACK(get_text), box);
+    g_signal_connect(button[1], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[2], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[3], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[4], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[5], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[6], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[7], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[8], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[9], "clicked", G_CALLBACK(add_text), box);
+    g_signal_connect(button[14], "clicked", G_CALLBACK(add_text), box);
 }
+
+char input[20] = {0}, output[20] = {0};
+int count = 0;
+float actual, old;
+
+/*void calculare(GtkWidget *button) {
+    // functie de calculare
+    const gchar *text = gtk_button_get_label(button);
+    if (strcmp(text, "+") == 0) {
+        actual = atof(input);
+        printf("%f\n", actual);
+    }
+    if (strcmp(text, "=") == 0) {
+        printf("%f\n", actual);
+    } else {
+        strcat(input, text);
+    }
+}*/
 
 int main(int argc, char **argv) {
     // declarare fereastra
@@ -118,6 +166,12 @@ int main(int argc, char **argv) {
 
     // pozitionare butoane si input box
     pozitionare_elemente(grid, box, button);
+
+    // put in box value of 0
+    // calculare(button);
+    // return the value entered in box when button
+
+    // calculare(button, box);
 
     // functie de setare semnal inchidere
     g_signal_connect(main_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
