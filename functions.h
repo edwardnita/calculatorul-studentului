@@ -9,7 +9,7 @@ double multiplication(double, double);
 
 double division(double, double);
 
-int modulo(double, double);
+int modulo(int, int);
 
 int negation(int);
 
