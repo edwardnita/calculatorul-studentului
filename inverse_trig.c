@@ -29,31 +29,3 @@ double arccos(double x, int *imposibil) {
     // arcsin + arccos = pi/2
     return APROX(pi /  2 - arcsin(x, imposibil));
 }
-
-double arctan(double x) {
-    double S = x, px = x;
-    int i;
-    if(x > 1) {
-        return APROX(pi / 2 - arctan(1 / x));
-    } else if (x < -1) {
-        return APROX(-pi / 2 - arctan(1 / x));
-    } else {
-        for (i = 0; i < MAXITER; i++) {
-            px *= -x*x;
-            S += px/(2 * i + 1);
-            if(CHECK_TOL(px/(2 * i + 1))) 
-                return APROX(S);
-        }
-        return APROX(S);
-    }
-}
-
-double arccot(double x) {
-    if (x > 1) {
-        return APROX(arctan(1 / x));
-    } else if (x < -1) {
-        return APROX(pi + arctan(1 / x));
-    } else {
-        return APROX(pi / 2 - arctan(x));
-    }
-}
