@@ -3,9 +3,9 @@
 
 #include "functions.h"
 
-void initializare_butoane(GtkWidget *button[18]) {
+void initializare_butoane(GtkWidget *button[31]) {
     // creare butoane
-    button[0] = gtk_button_new_with_label("0");
+    button[0] = gtk_button_new_with_label(".");
     button[1] = gtk_button_new_with_label("1");
     button[2] = gtk_button_new_with_label("2");
     button[3] = gtk_button_new_with_label("3");
@@ -19,15 +19,30 @@ void initializare_butoane(GtkWidget *button[18]) {
     button[11] = gtk_button_new_with_label("-");
     button[12] = gtk_button_new_with_label("*");
     button[13] = gtk_button_new_with_label("/");
-    button[14] = gtk_button_new_with_label(".");
+    button[14] = gtk_button_new_with_label("0");
     button[15] = gtk_button_new_with_label("=");
-    button[16] = gtk_button_new_with_label("not");
+    button[16] = gtk_button_new_with_label("%");
+    button[17] = gtk_button_new_with_label("not");
+    button[18] = gtk_button_new_with_label("AND");
+    button[19] = gtk_button_new_with_label("OR");
+    button[20] = gtk_button_new_with_label("XOR");
+    button[21] = gtk_button_new_with_label("fact");
+    button[22] = gtk_button_new_with_label("sin");
+    button[23] = gtk_button_new_with_label("cos");
+    button[24] = gtk_button_new_with_label("tan");
+    button[25] = gtk_button_new_with_label("ctg");
+    button[26] = gtk_button_new_with_label("arcsin");
+    button[27] = gtk_button_new_with_label("arccos");
+    button[28] = gtk_button_new_with_label("ln");
+    button[29] = gtk_button_new_with_label("log");
+    button[30] = gtk_button_new_with_label("power");
 }
 
 void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
-                          GtkWidget *button[18]) {
+                          GtkWidget *button[31]) {
     // pozitionare automata continut in fereastra
     gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
+    gtk_grid_set_row_homogeneous(GTK_GRID(grid), TRUE);
     gtk_grid_attach(GTK_GRID(grid), box, 0, 0, 8, 2);
     gtk_grid_attach(GTK_GRID(grid), button[7], 0, 3, 2, 1);
     gtk_grid_attach(GTK_GRID(grid), button[8], 2, 3, 2, 1);
@@ -46,6 +61,24 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
     gtk_grid_attach(GTK_GRID(grid), button[10], 4, 9, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), button[11], 5, 9, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), button[15], 6, 9, 2, 1);
+
+    gtk_grid_attach(GTK_GRID(grid), button[17], 0, 11, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[18], 2, 11, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[19], 4, 11, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[20], 6, 11, 2, 1);
+
+    gtk_grid_attach(GTK_GRID(grid), button[21], 0, 13, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[22], 2, 13, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[23], 4, 13, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[24], 6, 13, 2, 1);
+
+    gtk_grid_attach(GTK_GRID(grid), button[25], 0, 15, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[26], 2, 15, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[27], 4, 15, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[28], 6, 15, 2, 1);
+
+    gtk_grid_attach(GTK_GRID(grid), button[29], 2, 17, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[30], 4, 17, 2, 1);
 }
 
 int main(int argc, char **argv) {
@@ -53,7 +86,7 @@ int main(int argc, char **argv) {
     GtkWidget *main_window;
     GtkWidget *box;
     GtkWidget *grid;
-    GtkWidget *button[18];
+    GtkWidget *button[31];
 
     // functie de initializare
     gtk_init(&argc, &argv);
