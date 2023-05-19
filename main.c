@@ -115,6 +115,20 @@ void get_text(GtkButton *button, gpointer data) {
         gchar *result = g_strdup_printf("%f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
+    if (strcmp(operation, "bit_and") == 0) {
+        printf("Am intrat in bit_and\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %f\n", operand2);
+        result = (int)result;
+        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        result = (int)bit_and((int)operand1, (int)operand2);
+        printf("Result is: %d\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
 }
 
 void add_text(GtkButton *button, gpointer data) {
@@ -175,7 +189,32 @@ void make_modulo(GtkButton *button, gpointer data) {
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
     printf("Am luat numarul: %f\n", operand1);
+
     operation = "modulo";
+}
+
+void make_negation(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    operand1 = (int)operand1;
+    // clear the text box
+    operand1 = negation(operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "negation";
+    gchar *result = g_strdup_printf("%f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_bit_and(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %f\n", operand1);
+    operation = "bit_and";
 }
 
 void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
@@ -236,6 +275,8 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
     g_signal_connect(button[12], "clicked", G_CALLBACK(make_mult), box);
     g_signal_connect(button[13], "clicked", G_CALLBACK(make_div), box);
     g_signal_connect(button[16], "clicked", G_CALLBACK(make_modulo), box);
+    g_signal_connect(button[17], "clicked", G_CALLBACK(make_negation), box);
+    g_signal_connect(button[18], "clicked", G_CALLBACK(make_bit_and), box);
 }
 
 /*void calculare(GtkWidget *button) {
