@@ -54,9 +54,9 @@ void get_text(GtkButton *button, gpointer data) {
         // cast din gchar in double
         operand2 = atof(op2);
         result = addition(operand1, operand2);
-        printf("Result is: %f\n", result);
+        printf("Result is: %.4f\n", result);
         // cast din double in gchar
-        gchar *result = g_strdup_printf("%f", result);
+        gchar *result = g_strdup_printf("%.4f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
     if (strcmp(operation, "sub") == 0) {
@@ -64,13 +64,13 @@ void get_text(GtkButton *button, gpointer data) {
         op2 = gtk_entry_get_text(GTK_ENTRY(entry));
         // cast din gchar in double
         operand2 = atof(op2);
-        printf("Am luat numarul: %f\n", operand2);
+        printf("Am luat numarul: %.4f\n", operand2);
         result = 0;
-        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
         result = operand1 - operand2;
-        printf("Result is: %f\n", result);
+        printf("Result is: %.4f\n", result);
         // cast din double in gchar
-        gchar *result = g_strdup_printf("%f", result);
+        gchar *result = g_strdup_printf("%.4f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
     if (strcmp(operation, "mult") == 0) {
@@ -78,13 +78,13 @@ void get_text(GtkButton *button, gpointer data) {
         op2 = gtk_entry_get_text(GTK_ENTRY(entry));
         // cast din gchar in double
         operand2 = atof(op2);
-        printf("Am luat numarul: %f\n", operand2);
+        printf("Am luat numarul: %.4f\n", operand2);
         result = 0;
-        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
         result = multiplication(operand1, operand2);
-        printf("Result is: %f\n", result);
+        printf("Result is: %.4f\n", result);
         // cast din double in gchar
-        gchar *result = g_strdup_printf("%f", result);
+        gchar *result = g_strdup_printf("%.4f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
     if (strcmp(operation, "div") == 0) {
@@ -92,13 +92,13 @@ void get_text(GtkButton *button, gpointer data) {
         op2 = gtk_entry_get_text(GTK_ENTRY(entry));
         // cast din gchar in double
         operand2 = atof(op2);
-        printf("Am luat numarul: %f\n", operand2);
+        printf("Am luat numarul: %.4f\n", operand2);
         result = 0;
-        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
         result = division(operand1, operand2);
-        printf("Result is: %f\n", result);
+        printf("Result is: %.4f\n", result);
         // cast din double in gchar
-        gchar *result = g_strdup_printf("%f", result);
+        gchar *result = g_strdup_printf("%.4f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
     if (strcmp(operation, "modulo") == 0) {
@@ -106,13 +106,13 @@ void get_text(GtkButton *button, gpointer data) {
         op2 = gtk_entry_get_text(GTK_ENTRY(entry));
         // cast din gchar in double
         operand2 = atof(op2);
-        printf("Am luat numarul: %f\n", operand2);
+        printf("Am luat numarul: %.4f\n", operand2);
         result = 0;
-        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
         result = (int)modulo((int)operand1, (int)operand2);
-        printf("Result is: %f\n", result);
+        printf("Result is: %.4f\n", result);
         // cast din double in gchar
-        gchar *result = g_strdup_printf("%f", result);
+        gchar *result = g_strdup_printf("%.4f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
     if (strcmp(operation, "bit_and") == 0) {
@@ -120,13 +120,13 @@ void get_text(GtkButton *button, gpointer data) {
         op2 = gtk_entry_get_text(GTK_ENTRY(entry));
         // cast din gchar in double
         operand2 = atof(op2);
-        printf("Am luat numarul: %f\n", operand2);
+        printf("Am luat numarul: %.4f\n", operand2);
         result = (int)result;
-        printf("op1 is %f, op2 is %f\n", operand1, operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
         result = (int)bit_and((int)operand1, (int)operand2);
         printf("Result is: %d\n", result);
         // cast din double in gchar
-        gchar *result = g_strdup_printf("%f", result);
+        gchar *result = g_strdup_printf("%.4f", result);
         gtk_entry_set_text(GTK_ENTRY(entry), result);
     }
 }
@@ -148,7 +148,7 @@ void make_add(GtkButton *button, gpointer data) {
     operand1 = atof(op1);
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
     operation = "add";
 }
 
@@ -158,7 +158,7 @@ void make_sub(GtkButton *button, gpointer data) {
     operand1 = atof(op1);
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
     operation = "sub";
 }
 
@@ -168,7 +168,7 @@ void make_mult(GtkButton *button, gpointer data) {
     operand1 = atof(op1);
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
     operation = "mult";
 }
 
@@ -178,7 +178,7 @@ void make_div(GtkButton *button, gpointer data) {
     operand1 = atof(op1);
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
     operation = "div";
 }
 
@@ -188,7 +188,7 @@ void make_modulo(GtkButton *button, gpointer data) {
     operand1 = atof(op1);
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
 
     operation = "modulo";
 }
@@ -201,9 +201,9 @@ void make_negation(GtkButton *button, gpointer data) {
     // clear the text box
     operand1 = negation(operand1);
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
     operation = "negation";
-    gchar *result = g_strdup_printf("%f", operand1);
+    gchar *result = g_strdup_printf("%.4f", operand1);
     gtk_entry_set_text(GTK_ENTRY(entry), result);
 }
 
@@ -213,7 +213,7 @@ void make_bit_and(GtkButton *button, gpointer data) {
     operand1 = atof(op1);
     // clear the text box
     gtk_entry_set_text(GTK_ENTRY(entry), "");
-    printf("Am luat numarul: %f\n", operand1);
+    printf("Am luat numarul: %.4f\n", operand1);
     operation = "bit_and";
 }
 
@@ -284,10 +284,10 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
     const gchar *text = gtk_button_get_label(button);
     if (strcmp(text, "+") == 0) {
         actual = atof(input);
-        printf("%f\n", actual);
+        printf("%.4f\n", actual);
     }
     if (strcmp(text, "=") == 0) {
-        printf("%f\n", actual);
+        printf("%.4f\n", actual);
     } else {
         strcat(input, text);
     }

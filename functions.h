@@ -41,8 +41,4 @@ double arcsin(double, int*);
 
 double arccos(double, int*);
 
-double arctan(double);
-
-double arccot(double);
-
 #endif
