@@ -7,7 +7,7 @@
 static gchar *operation, *op1, *op2;
 double operand1, operand2, result;
 
-void initializare_butoane(GtkWidget *button[31]) {
+void initializare_butoane(GtkWidget *button[32]) {
     // creare butoane
     button[0] = gtk_button_new_with_label(".");
     button[1] = gtk_button_new_with_label("1");
@@ -39,7 +39,8 @@ void initializare_butoane(GtkWidget *button[31]) {
     button[27] = gtk_button_new_with_label("arccos");
     button[28] = gtk_button_new_with_label("ln");
     button[29] = gtk_button_new_with_label("log");
-    button[30] = gtk_button_new_with_label("power");
+    button[30] = gtk_button_new_with_label("exp");
+    button[31] = gtk_button_new_with_label("x^y");
 }
 
 void get_text(GtkButton *button, gpointer data) {
@@ -124,6 +125,75 @@ void get_text(GtkButton *button, gpointer data) {
         result = (int)result;
         printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
         result = (int)bit_and((int)operand1, (int)operand2);
+        printf("Result is: %d\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%.4f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "bit_or") == 0) {
+        printf("Am intrat in bit_or\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %.4f\n", operand2);
+        result = (int)result;
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
+        result = (int)bit_or((int)operand1, (int)operand2);
+        printf("Result is: %d\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%.4f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "bit_xor") == 0) {
+        printf("Am intrat in bit_xor\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %.4f\n", operand2);
+        result = (int)result;
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
+        result = (int)bit_xor((int)operand1, (int)operand2);
+        printf("Result is: %d\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%.4f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "bit_xor") == 0) {
+        printf("Am intrat in bit_xor\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %.4f\n", operand2);
+        result = (int)result;
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
+        result = (int)bit_xor((int)operand1, (int)operand2);
+        printf("Result is: %d\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%.4f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "log") == 0) {
+        printf("Am intrat in log\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        // cast din gchar in double
+        operand2 = atof(op2);
+        printf("Am luat numarul: %.4f\n", operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
+        int imposibil;
+        result = logarithm(operand1, operand2, &imposibil);
+        printf("Result is: %d\n", result);
+        // cast din double in gchar
+        gchar *result = g_strdup_printf("%.4f", result);
+        gtk_entry_set_text(GTK_ENTRY(entry), result);
+    }
+    if (strcmp(operation, "power") == 0) {
+        printf("Am intrat in power\n");
+        op2 = gtk_entry_get_text(GTK_ENTRY(entry));
+        operand2 = atof(op2);
+        printf("Am luat numarul: %.4f\n", operand2);
+        printf("op1 is %.4f, op2 is %.4f\n", operand1, operand2);
+        int imposibil;
+        result = power(operand1, operand2, &imposibil);
         printf("Result is: %d\n", result);
         // cast din double in gchar
         gchar *result = g_strdup_printf("%.4f", result);
@@ -217,8 +287,173 @@ void make_bit_and(GtkButton *button, gpointer data) {
     operation = "bit_and";
 }
 
+void make_bit_or(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "bit_or";
+}
+
+void make_bit_xor(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "bit_xor";
+}
+
+void make_fact(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    operand1 = (int)operand1;
+    // clear the text box
+    operand1 = factorial(operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "fact";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_ln(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = ln(operand1, &imposibil);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "ln";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_logarithm(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "log";
+}
+
+void make_exp(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    operand1 = exponential(operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "exp";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_power(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "power";
+}
+
+void make_sinus(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = sinus(operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "sinus";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_cosinus(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = cosinus(operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "cosinus";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_tangent(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = tangent(operand1, &imposibil);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "tan";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_cotangent(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = cotangent(operand1, &imposibil);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "cotan";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_arcsin(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = arcsin(operand1, &imposibil);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "arcsin";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
+void make_arccos(GtkButton *button, gpointer data) {
+    GtkWidget *entry = GTK_WIDGET(data);
+    op1 = gtk_entry_get_text(GTK_ENTRY(entry));
+    operand1 = atof(op1);
+    // clear the text box
+    int imposibil;
+    operand1 = arccos(operand1, &imposibil);
+    gtk_entry_set_text(GTK_ENTRY(entry), "");
+    printf("Am luat numarul: %.4f\n", operand1);
+    operation = "arccos";
+    gchar *result = g_strdup_printf("%.4f", operand1);
+    gtk_entry_set_text(GTK_ENTRY(entry), result);
+}
+
 void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
-                          GtkWidget *button[31]) {
+                          GtkWidget *button[32]) {
     // pozitionare automata continut in fereastra
     gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
     gtk_grid_set_row_homogeneous(GTK_GRID(grid), TRUE);
@@ -258,6 +493,7 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
 
     gtk_grid_attach(GTK_GRID(grid), button[29], 2, 17, 2, 1);
     gtk_grid_attach(GTK_GRID(grid), button[30], 4, 17, 2, 1);
+    gtk_grid_attach(GTK_GRID(grid), button[31], 0, 17, 2, 1);
 
     g_signal_connect(button[15], "clicked", G_CALLBACK(get_text), box);
     g_signal_connect(button[1], "clicked", G_CALLBACK(add_text), box);
@@ -277,21 +513,20 @@ void pozitionare_elemente(GtkWidget *grid, GtkWidget *box,
     g_signal_connect(button[16], "clicked", G_CALLBACK(make_modulo), box);
     g_signal_connect(button[17], "clicked", G_CALLBACK(make_negation), box);
     g_signal_connect(button[18], "clicked", G_CALLBACK(make_bit_and), box);
+    g_signal_connect(button[19], "clicked", G_CALLBACK(make_bit_or), box);
+    g_signal_connect(button[20], "clicked", G_CALLBACK(make_bit_xor), box);
+    g_signal_connect(button[21], "clicked", G_CALLBACK(make_fact), box);
+    g_signal_connect(button[28], "clicked", G_CALLBACK(make_ln), box);
+    g_signal_connect(button[29], "clicked", G_CALLBACK(make_logarithm), box);
+    g_signal_connect(button[30], "clicked", G_CALLBACK(make_exp), box);
+    g_signal_connect(button[31], "clicked", G_CALLBACK(make_power), box);
+    g_signal_connect(button[22], "clicked", G_CALLBACK(make_sinus), box);
+    g_signal_connect(button[23], "clicked", G_CALLBACK(make_cosinus), box);
+    g_signal_connect(button[24], "clicked", G_CALLBACK(make_tangent), box);
+    g_signal_connect(button[25], "clicked", G_CALLBACK(make_cotangent), box);
+    g_signal_connect(button[26], "clicked", G_CALLBACK(make_arcsin), box);
+    g_signal_connect(button[27], "clicked", G_CALLBACK(make_arccos), box);
 }
-
-/*void calculare(GtkWidget *button) {
-    // functie de calculare
-    const gchar *text = gtk_button_get_label(button);
-    if (strcmp(text, "+") == 0) {
-        actual = atof(input);
-        printf("%.4f\n", actual);
-    }
-    if (strcmp(text, "=") == 0) {
-        printf("%.4f\n", actual);
-    } else {
-        strcat(input, text);
-    }
-}*/
 
 int main(int argc, char **argv) {
     // declarare fereastra
