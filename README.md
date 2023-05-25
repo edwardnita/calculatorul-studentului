@@ -13,12 +13,16 @@ Se bazeaza pe seria:
 
 Aceasta formula functioneaza doar pentru abs(x) < 1. Asa ca folosim si relatia:
  ln(x) = k*ln(X) + ln(x/2^k)
-Impartim x la 2 de k ori, pana ce x este in intervalul cerut
+Impartim x la 2 de k ori, pana ce x este in intervalul cerut.
+
+Pentru x ∉ (0, inf), functia va intoarce impsoibil = 0.
 
 ### Logaritm
 Folosim relatia urmatoare, pentru a calcula doar ln(a) si ln(b).
 
 ![log](https://github.com/edwardnita/calculatorul-studentului/assets/118977068/b5488d77-576c-49a3-a801-4df62253be58)
+
+Daca a sau b ∉ (0, inf), functia va intoarce imposibil = 0.
 
 ### Exponentiala
 Se bazeaza pe seria(care merge pentru orice x):
@@ -34,6 +38,8 @@ Partea fractionara este calculata cu formula:
 Iar partea naturala este calculata recursiv:
 
 ![power2](https://github.com/edwardnita/calculatorul-studentului/assets/118977068/d7bf72b7-2b6c-4196-b268-81e87f3ef390)
+
+In cazul in care baza este negativa, iar exponentul nu este intreg, se intoarce imposibil = 0, deoarece se poate ajunge la numere complexe.
 
 ### Factorial
 Factorialul este calculat recursiv, insa folosind un acumulator ca optimizare
@@ -54,5 +60,7 @@ Arcsinusul a fost fost calculat de asemena folosind serii:
 Arccosinusul a fost calculat in functie de arcsin, astfel:
 
 ![arccos](https://github.com/edwardnita/calculatorul-studentului/assets/118977068/8c438200-fbfc-4286-b72a-0ea12b4d369f)
+
+Pentru x ∉ [-1,1], functia returneaza imposibil = 0.
 
 
